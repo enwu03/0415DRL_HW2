@@ -1,0 +1,11 @@
+{
+  "name": "0415drl_hw2",
+  "version": "1.0.0",
+  "description": "Cliff Walking RL Algorithm Comparison",
+  "main": "script.js",
+  "scripts": {
+    "dev:ending": "git add handover.md tasks.md && git commit -m \"docs: sync handover.md and update tasks timeline\""
+  },
+  "author": "enwu03",
+  "license": "MIT"
+}

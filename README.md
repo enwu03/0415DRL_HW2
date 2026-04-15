@@ -86,3 +86,8 @@ Simply visit the **[Live Demo](https://enwu03.github.io/0415DRL_HW2/)**.
 - **HTML5** — Semantic structure
 - **CSS3** — Dark glassmorphism theme with responsive layout
 - **JavaScript (ES6+)** — RL algorithms, Canvas chart rendering, DOM visualization
+
+## Development Workflow
+This project is developed and orchestrated using **[OpenSpec](https://github.com/Fission-AI/OpenSpec)** (`@fission-ai/openspec`). 
+
+Using the Spec-driven development (SDD) methodology, this workflow leverages AI-assisted commands, dynamic `tasks.md` timelines, and automatic `handover.md` synchronization (via `npm run dev:ending`) to ensure precise alignment between the architectural specs and the final implementation.
