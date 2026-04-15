@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cliff Walking: Q-learning vs SARSA</title>
+    <meta name="description" content="Interactive comparison of Q-learning and SARSA reinforcement learning algorithms on the Cliff Walking gridworld environment.">
+    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header -->
+    <header id="app-header">
+        <div class="header-content">
+            <h1>🏔️ Cliff Walking</h1>
+            <p class="subtitle">Q-learning vs SARSA — 強化學習演算法比較</p>
+        </div>
+    </header>
+
+    <main id="app-main">
+
+        <!-- Controls Panel -->
+        <section class="panel" id="controls-panel">
+            <h2 class="panel-title">⚙️ 參數設定</h2>
+            <div class="controls-grid">
+                <div class="control-group">
+                    <label for="grid-rows">網格列數 (Rows)</label>
+                    <input type="number" id="grid-rows" min="3" max="10" value="4">
+                </div>
+                <div class="control-group">
+                    <label for="grid-cols">網格行數 (Cols)</label>
+                    <input type="number" id="grid-cols" min="4" max="20" value="12">
+                </div>
+                <div class="control-group">
+                    <label for="alpha-slider">學習率 α: <span id="alpha-val">0.1</span></label>
+                    <input type="range" id="alpha-slider" min="0.01" max="1" step="0.01" value="0.1">
+                </div>
+                <div class="control-group">
+                    <label for="gamma-slider">折扣因子 γ: <span id="gamma-val">0.9</span></label>
+                    <input type="range" id="gamma-slider" min="0" max="1" step="0.01" value="0.9">
+                </div>
+                <div class="control-group">
+                    <label for="epsilon-slider">探索率 ε: <span id="epsilon-val">0.1</span></label>
+                    <input type="range" id="epsilon-slider" min="0" max="0.5" step="0.01" value="0.1">
+                </div>
+                <div class="control-group">
+                    <label for="episodes-input">訓練回合數</label>
+                    <input type="number" id="episodes-input" min="100" max="5000" step="50" value="500">
+                </div>
+            </div>
+            <div class="btn-row">
+                <button id="train-btn" class="btn-primary">🚀 開始訓練</button>
+                <button id="reset-btn" class="btn-secondary">🔄 重置</button>
+            </div>
+            <div id="progress-bar-container" style="display:none;">
+                <div id="progress-bar"></div>
+                <span id="progress-text">0%</span>
+            </div>
+        </section>
+
+        <!-- Environment Preview -->
+        <section class="panel" id="env-panel">
+            <h2 class="panel-title">🗺️ 環境預覽</h2>
+            <p class="panel-desc">S = 起點 | G = 終點 | 🟥 = 懸崖 (Cliff)</p>
+            <div id="env-grid-wrapper">
+                <div id="env-grid" class="grid-container"></div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results-section" style="display:none;">
+
+            <!-- Learning Curve -->
+            <div class="panel" id="chart-panel">
+                <h2 class="panel-title">📈 學習曲線 (每回合累積獎勵)</h2>
+                <div class="chart-container">
+                    <canvas id="reward-chart"></canvas>
+                </div>
+                <div class="legend">
+                    <span class="legend-item"><span class="legend-color" style="background:#00e5ff;"></span> Q-learning</span>
+                    <span class="legend-item"><span class="legend-color" style="background:#ff9100;"></span> SARSA</span>
+                </div>
+            </div>
+
+            <!-- Policy Grids -->
+            <div class="dual-panel">
+                <div class="panel policy-panel">
+                    <h2 class="panel-title" style="color:#00e5ff;">🧠 Q-learning 策略</h2>
+                    <p class="panel-desc" id="q-path-info"></p>
+                    <div id="q-grid-wrapper">
+                        <div id="q-policy-grid" class="grid-container"></div>
+                    </div>
+                </div>
+                <div class="panel policy-panel">
+                    <h2 class="panel-title" style="color:#ff9100;">🛡️ SARSA 策略</h2>
+                    <p class="panel-desc" id="s-path-info"></p>
+                    <div id="s-grid-wrapper">
+                        <div id="s-policy-grid" class="grid-container"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analysis -->
+            <div class="panel" id="analysis-panel">
+                <h2 class="panel-title">📊 分析比較</h2>
+                <div id="analysis-content"></div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Reinforcement Learning — Cliff Walking Assignment</p>
+    </footer>
+
+    <script src="script.js?v=3"></script>
+</body>
+</html>
